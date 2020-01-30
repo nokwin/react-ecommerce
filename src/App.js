@@ -16,8 +16,21 @@ class App extends React.Component {
   authStateListener = null;
 
   componentDidMount() {
-    this.authStateListener = auth.onAuthStateChanged(async user => {
-      await createUserProfileDocument(user);
+    this.authStateListener = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapshot => {
+          this.setState({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data()
+            }
+          });
+        });
+      }
+
+      this.setState({ currentUser: null });
     });
   }
 

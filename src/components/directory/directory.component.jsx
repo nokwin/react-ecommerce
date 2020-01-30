@@ -48,7 +48,7 @@ export class Directory extends React.Component {
     const { sections } = this.state;
 
     return (
-      <div class="directory-menu">{sections.map(this.renderSections)}</div>
+      <div className="directory-menu">{sections.map(this.renderSections)}</div>
     );
   }
 }
