@@ -6,7 +6,7 @@ import { HomePage } from "./pages/homepage/homepage.component";
 import { Shop } from "./pages/shop/shop.component";
 import { Header } from "./components/header/header.component";
 import { AuthPage } from "./pages/auth/auth.component";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends React.Component {
   state = {
@@ -16,10 +16,8 @@ class App extends React.Component {
   authStateListener = null;
 
   componentDidMount() {
-    this.authStateListener = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user });
-
-      console.log(user);
+    this.authStateListener = auth.onAuthStateChanged(async user => {
+      await createUserProfileDocument(user);
     });
   }
 
