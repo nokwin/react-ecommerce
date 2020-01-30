@@ -40,8 +40,8 @@ export class Directory extends React.Component {
     ]
   };
 
-  renderSections = ({ title, imageUrl, id, size }) => (
-    <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} />
+  renderSections = ({ id, ...sectionProps }) => (
+    <MenuItem key={id} {...sectionProps} />
   );
 
   render() {
