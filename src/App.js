@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import "./App.css";
-import { HomePage } from "./pages/homepage/homepage.component";
-import { Shop } from "./pages/shop/shop.component";
-import { Header } from "./components/header/header.component";
-import { AuthPage } from "./pages/auth/auth.component";
+import HomePage from "./pages/homepage/homepage.component";
+import Shop from "./pages/shop/shop.component";
+import Header from "./components/header/header.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
-import { CheckoutPage } from "./pages/checkout/checkout.component";
+import CheckoutPage from "./pages/checkout/checkout.component";
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
 class App extends React.Component {
   authStateListener = null;
@@ -50,7 +50,11 @@ class App extends React.Component {
             exact
             path="/signin"
             render={() =>
-              this.props.currentUser ? <Redirect to="/" /> : <AuthPage />
+              this.props.currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <SignInAndSignUpPage />
+              )
             }
           />
           <Route exact path="/checkout" component={CheckoutPage} />
