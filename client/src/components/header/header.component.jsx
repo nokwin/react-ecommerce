@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
-import { connect } from "react-redux";
 
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-import { signOutStart } from "../../redux/user/user.actions";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import CurrentUserContext from "../../context/current-user/current-user.context";
 import { CartContext } from "../../providers/cart/cart.provider";
+import { UserContext } from "../../providers/user/user.provider";
 
 import {
   HeaderContainer,
@@ -15,8 +13,8 @@ import {
   OptionLink
 } from "./header.styles";
 
-const Header = ({ signOutStart }) => {
-  const currentUser = useContext(CurrentUserContext);
+const Header = () => {
+  const { currentUser, signOut } = useContext(UserContext);
   const { hidden } = useContext(CartContext);
 
   return (
@@ -28,7 +26,7 @@ const Header = ({ signOutStart }) => {
         <OptionLink to="/shop">SHOP</OptionLink>
         <OptionLink to="/shop">CONTACT</OptionLink>
         {currentUser ? (
-          <OptionLink as="div" onClick={signOutStart}>
+          <OptionLink as="div" onClick={signOut}>
             SIGN OUT
           </OptionLink>
         ) : (
@@ -41,8 +39,4 @@ const Header = ({ signOutStart }) => {
   );
 };
 
-const mapDispatchToProps = {
-  signOutStart
-};
-
-export default connect(null, mapDispatchToProps)(Header);
+export default Header;

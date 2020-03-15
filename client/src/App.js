@@ -1,28 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
 
 import "./App.css";
 import HomePage from "./pages/homepage/homepage.component";
 import { ShopPage } from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
-import { selectCurrentUser } from "./redux/user/user.selectors";
 import CheckoutPage from "./pages/checkout/checkout.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import { checkUserSession } from "./redux/user/user.actions";
-import CurrentUserContext from "./context/current-user/current-user.context";
+import { UserContext } from "./providers/user/user.provider";
 
-const App = ({ checkUserSession, currentUser }) => {
+const App = ({}) => {
+  const { checkUserAuth, currentUser } = useContext(UserContext);
+
   useEffect(() => {
-    checkUserSession();
+    checkUserAuth();
   }, []);
 
   return (
     <div>
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header />
-      </CurrentUserContext.Provider>
+      <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
@@ -39,12 +35,4 @@ const App = ({ checkUserSession, currentUser }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
-});
-
-const mapDispatchToProps = {
-  checkUserSession
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
