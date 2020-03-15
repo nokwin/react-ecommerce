@@ -11,15 +11,18 @@ import { selectCurrentUser } from "./redux/user/user.selectors";
 import CheckoutPage from "./pages/checkout/checkout.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { checkUserSession } from "./redux/user/user.actions";
+import CurrentUserContext from "./context/current-user/current-user.context";
 
-const App = ({ checkUserSession }) => {
+const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
     checkUserSession();
   }, []);
 
   return (
     <div>
-      <Header />
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header />
+      </CurrentUserContext.Provider>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
@@ -27,11 +30,7 @@ const App = ({ checkUserSession }) => {
           exact
           path="/signin"
           render={() =>
-            this.props.currentUser ? (
-              <Redirect to="/" />
-            ) : (
-              <SignInAndSignUpPage />
-            )
+            currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
           }
         />
         <Route exact path="/checkout" component={CheckoutPage} />
