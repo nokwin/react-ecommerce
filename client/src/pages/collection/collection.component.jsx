@@ -10,7 +10,7 @@ import {
 } from "./collection.styles";
 
 const CollectionPage = ({ match }) => {
-  const collections = useContext(CollectionsContext);
+  const { collections } = useContext(CollectionsContext);
   const collection = collections.find(
     c => c.routeName === match.params.collectionId
   );
