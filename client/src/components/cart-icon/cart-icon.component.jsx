@@ -8,7 +8,7 @@ import {
   ShoppingIcon,
   ItemCountContainer
 } from "./cart-icon.styles";
-import CartContext from "../../context/cart/cart.context";
+import { CartContext } from "../../providers/cart/cart.provider";
 
 const CartIcon = ({ itemCount }) => {
   const { toggleHidden } = useContext(CartContext);
