@@ -4,7 +4,8 @@ import {
   addItemToCart,
   removeItemFromCart,
   filterItemFromCart,
-  getCartItemsCount
+  getCartItemsCount,
+  getCartItemsTotal
 } from "./cart.utils";
 
 export const CartContext = createContext({
@@ -14,7 +15,8 @@ export const CartContext = createContext({
   addItem: () => {},
   removeItem: () => {},
   clearItemFromCart: () => {},
-  cartItemsCount: 0
+  cartItemsCount: 0,
+  total: 0
 });
 
 const CartProvider = ({ children }) => {
@@ -23,12 +25,14 @@ const CartProvider = ({ children }) => {
 
   const [cartItems, setCartItems] = useState([]);
   const [cartItemsCount, setCartItemsCount] = useState(0);
+  const [total, setTotal] = useState(0);
   const addItem = item => setCartItems(addItemToCart(cartItems, item));
   const removeItem = item => setCartItems(removeItemFromCart(cartItems, item));
   const clearItemFromCart = item =>
     setCartItems(filterItemFromCart(cartItems, item));
   useEffect(() => {
     setCartItemsCount(getCartItemsCount(cartItems));
+    setTotal(getCartItemsTotal(cartItems));
   }, [cartItems]);
 
   return (
@@ -40,7 +44,8 @@ const CartProvider = ({ children }) => {
         addItem,
         removeItem,
         clearItemFromCart,
-        cartItemsCount
+        cartItemsCount,
+        total
       }}
     >
       {children}
