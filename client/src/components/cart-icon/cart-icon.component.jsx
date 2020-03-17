@@ -1,15 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import {
   CartContainer,
   ShoppingIcon,
   ItemCountContainer
 } from "./cart-icon.styles";
-import { CartContext } from "../../providers/cart/cart.provider";
 
-const CartIcon = ({ toggleHidden }) => {
-  const { cartItemsCount } = useContext(CartContext);
-
+const CartIcon = ({ toggleHidden, cartItemsCount }) => {
   return (
     <CartContainer onClick={toggleHidden}>
       <ShoppingIcon />
