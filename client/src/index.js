@@ -10,6 +10,7 @@ import "./index.css";
 import App from "./App";
 import CartProvider from "./providers/cart/cart.provider";
 import UserProvider from "./providers/user/user.provider";
+import { typeDefs, resolvers } from "./gql/resolvers";
 
 const httpLink = createHttpLink({
   uri: "https://crwn-clothing.com"
@@ -19,7 +20,15 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   link: httpLink,
-  cache
+  cache,
+  typeDefs,
+  resolvers
+});
+
+client.writeData({
+  data: {
+    cartHidden: true
+  }
 });
 
 ReactDOM.render(
