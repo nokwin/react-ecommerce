@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import CollectionPreview from "../collection-preview/collection-preview.component";
 import { CollectionsOverviewContainer } from "./collections-overview.styles";
-import CollectionsContext from "../../context/collections/collections.context";
 
-export const CollectionsOverview = () => {
-  const { collections } = useContext(CollectionsContext);
-
+export const CollectionsOverview = ({ collections }) => {
   return (
     <CollectionsOverviewContainer>
       {collections.map(({ id, ...otherCollectionProps }) => (
