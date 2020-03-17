@@ -1,6 +1,4 @@
-import React, { useContext } from "react";
-
-import { CartContext } from "../../providers/cart/cart.provider";
+import React from "react";
 
 import {
   CollectionItemContainer,
@@ -11,9 +9,8 @@ import {
   PriceContainer
 } from "./collection-styles.styles";
 
-const CollectionItem = ({ item }) => {
+const CollectionItem = ({ item, addItem }) => {
   const { name, price, imageUrl } = item;
-  const { addItem } = useContext(CartContext);
 
   return (
     <CollectionItemContainer>
