@@ -7,8 +7,8 @@ import {
 } from "./cart-icon.styles";
 import { CartContext } from "../../providers/cart/cart.provider";
 
-const CartIcon = () => {
-  const { toggleHidden, cartItemsCount } = useContext(CartContext);
+const CartIcon = ({ toggleHidden }) => {
+  const { cartItemsCount } = useContext(CartContext);
 
   return (
     <CartContainer onClick={toggleHidden}>

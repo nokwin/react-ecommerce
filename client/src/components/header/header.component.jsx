@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 
-import CartIcon from "../cart-icon/cart-icon.component";
+import { default as CartIcon } from "../cart-icon/cart-icon.container";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { CartContext } from "../../providers/cart/cart.provider";
 import { UserContext } from "../../providers/user/user.provider";
 
 import {
@@ -13,9 +12,8 @@ import {
   OptionLink
 } from "./header.styles";
 
-const Header = () => {
+const Header = ({ hidden }) => {
   const { currentUser, signOut } = useContext(UserContext);
-  const { hidden } = useContext(CartContext);
 
   return (
     <HeaderContainer>
