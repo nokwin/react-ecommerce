@@ -1,10 +1,14 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Route } from "react-router-dom";
 
-import { default as CollectionsOverview } from "../../components/collections-overview/collections-overview.container";
-import { default as CollectionsPage } from "../collection/collection.container";
+const CollectionsOverview = lazy(() =>
+  import("../../components/collections-overview/collections-overview.container")
+);
+const CollectionsPage = lazy(() =>
+  import("../collection/collection.container")
+);
 
-const ShopPageComponent = ({ match }) => {
+const ShopPage = ({ match }) => {
   return (
     <div className="shop-page">
       <Route exact path={`${match.path}`} component={CollectionsOverview} />
@@ -13,4 +17,4 @@ const ShopPageComponent = ({ match }) => {
   );
 };
 
-export const ShopPage = ShopPageComponent;
+export default ShopPage;
